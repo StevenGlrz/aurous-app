@@ -53,7 +53,10 @@ Please note I'm the only person working on this as of now, I'm no UX/UI designer
 
 ##Source Code
 The source code for the first beta release will not be available due to the fact I feel it needs improvements in a lot of places. Truthfully I never intended to release this application to the public so I slacked a bit in code structure. Once it has been optimized (hopefully by the next revision) it should be up on this same hub.
-
+ 
+ ##Contributing
+Once the source code is made open, you shall want to read over this
+[CONTRIBUTE](https://github.com/Codeusa/poptart-app/blob/master/CONTRIBUTE.md)
 
 ##Requierments 
 - Java 8
