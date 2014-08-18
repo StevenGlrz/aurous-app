@@ -45,6 +45,9 @@ function decryptSignature(decodeArray, sig) {
 }
 ```
 
+##Planned Platforms
+Project Poptart for this first release is making its way to Windows, Mac and Linux. Once the desktop version has reached completion in terms of features/functions mobile versions will come officially to Android, IOS and Blackberry. 
+
 ##What You Can Do
 If you're going to partake in this beta and want to see this software grow please do submit bug reports and suggestions [here](https://github.com/Codeusa/poptart-app/issues) to keep track of everything.
 
