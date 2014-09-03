@@ -9,14 +9,9 @@ Project Poptart is an application I've been working on building over the last mo
     
 The end goal of Project Poptart is to deliver the ability to import your playlist from various sources such as Vimeo, Soundcloud, Groove shark and more too prevent the need of going from one place or the other. Listen to what you love in a centralized manner. 
 
-## Beta 1.0
+## Beta 2.1.4
 
-For the initial beta release the application will only support YouTube, local playlist, and other sites will be supported by at least version 1.3. The main purpose of starting with YouTube is that its core player, the way videos are added into the application changes the most often and this requires the most testing. 
-    The core spot lighted features for 1.0 are as follows
-- Import YouTube playlist
-- Build playlist based on single links
-- Stream back videos in 1080p
-- Import entire channels playlist
+Change log here http://blog.poptart.me/post/96531815913/2-1-4-changelog
 
 The actual decryption of video signatures is a completely scriptable sub system of the app, though it will be open source in latest releases; I decided to go ahead and make certain parts scriptable, Javascript is what is used, you can see the scripts in the /data/scripts/ folder.
 
