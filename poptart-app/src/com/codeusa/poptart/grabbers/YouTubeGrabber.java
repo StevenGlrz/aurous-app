@@ -27,7 +27,7 @@ import com.codeusa.poptart.player.Settings;
 public class YouTubeGrabber {
 	public static String staticPlayerCode = "";
 
-	public static List<String> ExtractUrls(final String html)
+	private static List<String> ExtractUrls(final String html)
 			throws UnsupportedEncodingException {
 		final List<String> streams = new ArrayList<String>();
 		final List<String> signatures = new ArrayList<String>();
@@ -126,7 +126,7 @@ public class YouTubeGrabber {
 
 	}
 
-	public static String getHTML(final String urlToRead) {
+	private static String getHTML(final String urlToRead) {
 		URL url; // The URL to read
 		HttpURLConnection conn; // The actual connection to the web page
 		BufferedReader rd; // Used to read results from the web page
@@ -148,7 +148,7 @@ public class YouTubeGrabber {
 		return result;
 	}
 
-	public static String signDecipher(final String signature,
+	private static String signDecipher(final String signature,
 			final String playercode) {
 		try {
 			final ScriptEngine engine = new ScriptEngineManager()
