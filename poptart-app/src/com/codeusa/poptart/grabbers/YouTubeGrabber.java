@@ -19,6 +19,7 @@ import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
 
 import com.codeusa.poptart.player.Settings;
+import com.codeusa.poptart.utils.media.MediaUtils;
 
 /**
  * @author Andrew
@@ -41,7 +42,7 @@ public class YouTubeGrabber {
 		}
 
 		if (staticPlayerCode.equals("")) {
-			staticPlayerCode = getHTML("http://s.ytimg.com/yts/jsbin/"
+			staticPlayerCode = MediaUtils.getHTML("http://s.ytimg.com/yts/jsbin/"
 					+ "html5player-" + playerVersion.replace("\\", "") + ".js");
 		}
 
@@ -126,27 +127,7 @@ public class YouTubeGrabber {
 
 	}
 
-	private static String getHTML(final String urlToRead) {
-		URL url; // The URL to read
-		HttpURLConnection conn; // The actual connection to the web page
-		BufferedReader rd; // Used to read results from the web page
-		String line; // An individual line of the web page HTML
-		String result = ""; // A long string containing all the HTML
-		try {
-			url = new URL(urlToRead);
-			conn = (HttpURLConnection) url.openConnection();
-			conn.setRequestMethod("GET");
-			rd = new BufferedReader(
-					new InputStreamReader(conn.getInputStream()));
-			while ((line = rd.readLine()) != null) {
-				result += line;
-			}
-			rd.close();
-		} catch (final Exception e) {
-			e.printStackTrace();
-		}
-		return result;
-	}
+	
 
 	private static String signDecipher(final String signature,
 			final String playercode) {
