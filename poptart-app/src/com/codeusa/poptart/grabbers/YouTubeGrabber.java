@@ -40,7 +40,7 @@ public class YouTubeGrabber {
 
 		}
 
-		if (staticPlayerCode == "") {
+		if (staticPlayerCode.equals("")) {
 			staticPlayerCode = getHTML("http://s.ytimg.com/yts/jsbin/"
 					+ "html5player-" + playerVersion.replace("\\", "") + ".js");
 		}
@@ -112,7 +112,7 @@ public class YouTubeGrabber {
 			if (Settings.isStreamLowQuality() == true) {
 				return lowQualityMP4;
 			}
-			if (highQualityMP4 == "null") {
+			if (highQualityMP4.equals("null")) {
 				return lowQualityMP4;
 			} else {
 				return highQualityMP4;
