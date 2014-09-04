@@ -26,7 +26,7 @@ public class YouTubeDiscoUtils {
 	private static String getDiscoJson(final String query) {
 		String JSON_URL = String.format(DISCO_API_URL, query);
 		JSON_URL = JSON_URL.replace(" ", "%20");
-		final String json_data = getRemoteText(JSON_URL);
+		final String json_data = MediaUtils.getHTML(JSON_URL);
 
 		return json_data;
 	}
@@ -70,7 +70,7 @@ public class YouTubeDiscoUtils {
 	}
 
 	private static String getPlayListTitle(final String url) {
-		final String html = getRemoteText(url);
+		final String html = MediaUtils.getHTML(url);
 		final String pattern1 = "<title>";
 		final String pattern2 = "- YouTube</title>";
 		String title = "";
@@ -90,34 +90,5 @@ public class YouTubeDiscoUtils {
 		return title;
 	}
 
-	/**
-	 * @author Andrew
-	 *
-	 *         Gets remote text, in this case JSON/HTML
-	 *
-	 */
-	private static String getRemoteText(final String sourceURL) {
-		URL url; // The URL to read
-		HttpURLConnection conn; // The actual connection to the web page
-		BufferedReader rd; // Used to read results from the web page
-		String line; // An individual line of the web page HTML
-		String result = ""; // A long string containing all the HTML
-
-		try {
-			url = new URL(sourceURL);
-			conn = (HttpURLConnection) url.openConnection();
-			conn.setRequestMethod("GET");
-			rd = new BufferedReader(
-					new InputStreamReader(conn.getInputStream()));
-			while ((line = rd.readLine()) != null) {
-				result += line;
-			}
-			rd.close();
-		} catch (final Exception e) {
-
-			return "";
-		}
-		return result;
-	}
 
 }
