@@ -12,6 +12,7 @@ import javax.swing.JOptionPane;
 import org.apache.commons.lang3.StringEscapeUtils;
 
 import com.codeusa.poptart.tools.DiscoMixer;
+import com.codeusa.poptart.utils.media.MediaUtils;
 
 /**
  * @author Andrew
@@ -31,19 +32,7 @@ public class YouTubeDiscoUtils {
 	}
 
 	private static String getPlayListURL(final String json) {
-		System.out.println(json);
-		final String pattern1 = "\\u0026list=";
-		final String pattern2 = "\\u0026";
-		String playListID = "";
-
-		final Pattern p = Pattern.compile(Pattern.quote(pattern1) + "(.*?)"
-				+ Pattern.quote(pattern2));
-		final Matcher m = p.matcher(json);
-		while (m.find()) {
-
-			playListID = m.group(1);
-			System.out.println(playListID);
-		}
+		String playListID = MediaUtils.getBetween(json, "\\u0026list=", "\\u0026");
 		final String discoPlayList = String.format(PLAYLIST_URL, playListID);
 
 		return discoPlayList;

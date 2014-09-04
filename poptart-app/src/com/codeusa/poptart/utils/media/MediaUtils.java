@@ -16,6 +16,8 @@ import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.concurrent.TimeUnit;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javafx.application.Platform;
 
@@ -43,7 +45,23 @@ public class MediaUtils {
 	private static boolean muted = false;
 	public static String activeMedia;
 	public static boolean isOutOfFocus;
+	/**
+	 * @author Andrew
+	 *
+	 *        Gets a string between two givens patterns
+	 */
+	
+	public static String getBetween(String match, String patternStart, String patternEnd) {
+		final Pattern p = Pattern.compile(Pattern.quote(patternStart) + "(.*?)"
+				+ Pattern.quote(patternEnd));
+		final Matcher m = p.matcher(match);
+		while (m.find()) {
 
+			return m.group(1);
+		
+		}
+		return "";
+	}
 	/**
 	 * @author Andrew
 	 *
