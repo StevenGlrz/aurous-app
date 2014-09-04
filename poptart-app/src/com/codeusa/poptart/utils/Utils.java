@@ -9,14 +9,20 @@ import java.net.URL;
 
 import javax.swing.JFrame;
 
+/**
+*
+* @author https://github.com/nikkiii
+* @author Andrew
+* 
+*
+*/
 public class Utils {
 
-	// gotta get that quota
 	/**
 	 *
 	 * An enum containing operating system types
 	 *
-	 * @author Andrew
+	 * 
 	 *
 	 */
 	public static enum OperatingSystem {
