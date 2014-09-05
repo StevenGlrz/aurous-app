@@ -128,7 +128,8 @@ public class PlayListUtils {
 			return tubeLine;
 
 		} else if (sourceURL.contains("soundcloud")) {
-			return "";
+			
+			return SoundCloudGrabber.buildPlayListLine(sourceURL);
 		} else {
 			JOptionPane.showMessageDialog(null, "No importer found!", "Error",
 					JOptionPane.ERROR_MESSAGE);

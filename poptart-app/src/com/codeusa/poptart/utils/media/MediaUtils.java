@@ -74,7 +74,7 @@ public class MediaUtils {
 		if (sourceURL.contains("youtube")) {
 			return YouTubeGrabber.getYouTubeStream(getHTML(sourceURL));
 		} else if (sourceURL.contains("soundcloud")) {
-			return "";
+			return SoundCloudGrabber.getCachedURL(sourceURL).trim();
 		} else {
 			return "";
 		}
@@ -83,14 +83,14 @@ public class MediaUtils {
 	/**
 	 * @author Andrew
 	 *
-	 *         handles a given site and returns the stream url
+	 *         handles a given site and returns a built playlist string
 	 */
 	public static String getBuiltString(final String sourceURL) {
 		if (sourceURL.contains("youtube") || sourceURL.contains("youtu.be")) {
 
 			return YouTubeDataFetcher.buildPlayListLine(sourceURL);
 		} else if (sourceURL.contains("soundcloud")) {
-			return "";
+			return SoundCloudGrabber.buildPlayListLine(sourceURL);
 		} else {
 			return "";
 		}
