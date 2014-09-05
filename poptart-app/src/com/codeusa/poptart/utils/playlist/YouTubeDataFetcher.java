@@ -37,13 +37,6 @@ public class YouTubeDataFetcher {
 	 */
 	public static String getYouTubeID(final String url) {
 		final String id = "";
-		final String expression = "^.*((youtu.be"
-				+ "\\/)"
-				+ "|(v\\/)|(\\/u\\/w\\/)|(embed\\/)|(watch\\?))\\??v?=?([^#\\&\\?]*).*"; // var
-																							// regExp
-																							// =
-																							// /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?]*).*/;
-		System.out.println(expression);
 
 		final Pattern pattern = Pattern.compile(YOUTUBE_REGEX);
 		final Matcher matcher = pattern.matcher(url);

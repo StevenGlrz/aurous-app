@@ -1,9 +1,5 @@
 package com.codeusa.poptart.utils.playlist;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -32,7 +28,8 @@ public class YouTubeDiscoUtils {
 	}
 
 	private static String getPlayListURL(final String json) {
-		String playListID = MediaUtils.getBetween(json, "\\u0026list=", "\\u0026");
+		final String playListID = MediaUtils.getBetween(json, "\\u0026list=",
+				"\\u0026");
 		final String discoPlayList = String.format(PLAYLIST_URL, playListID);
 
 		return discoPlayList;
@@ -89,6 +86,5 @@ public class YouTubeDiscoUtils {
 
 		return title;
 	}
-
 
 }

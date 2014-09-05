@@ -29,7 +29,7 @@ import com.codeusa.poptart.utils.playlist.PlayListUtils;
  * @author Andrew
  *
  */
-public class PlayListTablePanel extends JPanel implements ActionListener {
+public class LoadedPlayListPanel extends JPanel implements ActionListener {
 	public static JTable table;
 	public static DefaultTableModel tableModel;
 	JPopupMenu popup;
@@ -40,7 +40,7 @@ public class PlayListTablePanel extends JPanel implements ActionListener {
 	private static final long serialVersionUID = -5598764407384505341L;
 	protected JScrollPane scroller;
 
-	public PlayListTablePanel() {
+	public LoadedPlayListPanel() {
 
 		initPanel();
 

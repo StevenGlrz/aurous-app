@@ -1,12 +1,8 @@
 package com.codeusa.poptart.grabbers;
 
-import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.List;
@@ -42,8 +38,9 @@ public class YouTubeGrabber {
 		}
 
 		if (staticPlayerCode.equals("")) {
-			staticPlayerCode = MediaUtils.getHTML("http://s.ytimg.com/yts/jsbin/"
-					+ "html5player-" + playerVersion.replace("\\", "") + ".js");
+			staticPlayerCode = MediaUtils
+					.getHTML("http://s.ytimg.com/yts/jsbin/" + "html5player-"
+							+ playerVersion.replace("\\", "") + ".js");
 		}
 
 		pattern = Pattern
@@ -126,8 +123,6 @@ public class YouTubeGrabber {
 		return highQualityMP4;
 
 	}
-
-	
 
 	private static String signDecipher(final String signature,
 			final String playercode) {

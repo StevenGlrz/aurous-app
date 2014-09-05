@@ -24,9 +24,9 @@ import com.codeusa.poptart.tools.PlayListBuilder;
 import com.codeusa.poptart.tools.PlayListImporter;
 import com.codeusa.poptart.ui.panels.AlbumArtPanel;
 import com.codeusa.poptart.ui.panels.FunctionsPanel;
+import com.codeusa.poptart.ui.panels.LoadedPlayListPanel;
 import com.codeusa.poptart.ui.panels.PlayListMetaPanel;
-import com.codeusa.poptart.ui.panels.PlayListSelectPanel;
-import com.codeusa.poptart.ui.panels.PlayListTablePanel;
+import com.codeusa.poptart.ui.panels.PlayListPanel;
 import com.codeusa.poptart.ui.panels.PlayerControlPanel;
 import com.codeusa.poptart.ui.panels.SongMetaPanel;
 import com.codeusa.poptart.utils.Utils;
@@ -120,7 +120,7 @@ public class PopTartFrame implements WindowListener {
 			e.printStackTrace();
 		}
 
-		final JPanel playListPanel = new PlayListSelectPanel();
+		final JPanel playListPanel = new PlayListPanel();
 		playListPanel.setBackground(new Color(34, 35, 39));
 		playListPanel.setForeground(Color.LIGHT_GRAY);
 		playListPanel.setBounds(0, 65, 200, 220);
@@ -197,7 +197,7 @@ public class PopTartFrame implements WindowListener {
 		}
 		Settings.loadSettings();
 
-		final JPanel loadedPlayListPanel = new PlayListTablePanel();
+		final JPanel loadedPlayListPanel = new LoadedPlayListPanel();
 		loadedPlayListPanel.setBorder(null);
 		loadedPlayListPanel.setBackground(new Color(37, 37, 37));
 		loadedPlayListPanel.setBounds(200, 163, 597, 362);

@@ -93,7 +93,7 @@ public class AboutFrame {
 			}
 		});
 
-		titleLabel = new JLabel("Project Poptart 2.1.4");
+		titleLabel = new JLabel("Project Poptart 2.1.5");
 		titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		titleLabel.setForeground(Color.WHITE);
 		titleLabel.setFont(new Font("Segoe UI", Font.PLAIN, 20));

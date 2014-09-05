@@ -25,6 +25,7 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JTable;
 
+import com.codeusa.poptart.grabbers.SoundCloudGrabber;
 import com.codeusa.poptart.grabbers.YouTubeGrabber;
 import com.codeusa.poptart.notifiers.NowPlayingNotification;
 import com.codeusa.poptart.player.Settings;
@@ -32,7 +33,7 @@ import com.codeusa.poptart.player.functions.PlayerFunctions;
 import com.codeusa.poptart.player.scenes.MediaPlayerScene;
 import com.codeusa.poptart.ui.frames.PopTartFrame;
 import com.codeusa.poptart.ui.panels.AlbumArtPanel;
-import com.codeusa.poptart.ui.panels.PlayListTablePanel;
+import com.codeusa.poptart.ui.panels.LoadedPlayListPanel;
 import com.codeusa.poptart.ui.panels.PlayerControlPanel;
 import com.codeusa.poptart.ui.panels.SongMetaPanel;
 import com.codeusa.poptart.utils.playlist.YouTubeDataFetcher;
@@ -45,23 +46,26 @@ public class MediaUtils {
 	private static boolean muted = false;
 	public static String activeMedia;
 	public static boolean isOutOfFocus;
+
 	/**
 	 * @author Andrew
 	 *
-	 *        Gets a string between two givens patterns
+	 *         Gets a string between two givens patterns
 	 */
-	
-	public static String getBetween(String match, String patternStart, String patternEnd) {
+
+	public static String getBetween(final String match,
+			final String patternStart, final String patternEnd) {
 		final Pattern p = Pattern.compile(Pattern.quote(patternStart) + "(.*?)"
 				+ Pattern.quote(patternEnd));
 		final Matcher m = p.matcher(match);
 		while (m.find()) {
 
 			return m.group(1);
-		
+
 		}
 		return "";
 	}
+
 	/**
 	 * @author Andrew
 	 *
@@ -74,7 +78,7 @@ public class MediaUtils {
 		if (sourceURL.contains("youtube")) {
 			return YouTubeGrabber.getYouTubeStream(getHTML(sourceURL));
 		} else if (sourceURL.contains("soundcloud")) {
-			return SoundCloudGrabber.getCachedURL(sourceURL).trim();
+			return SoundCloudGrabber.getCachedURL(sourceURL);
 		} else {
 			return "";
 		}
@@ -164,6 +168,7 @@ public class MediaUtils {
 			final int row = target.getSelectedRow();
 
 			final String albumArt = (String) target.getValueAt(row, 6);
+
 			final ImageIcon icon = new ImageIcon(new URL(albumArt));
 
 			AlbumArtPanel.albumArtLabel.setIcon(new ImageIcon(
@@ -216,7 +221,7 @@ public class MediaUtils {
 	 */
 	public static void handleEndOfStream() {
 
-		final JTable table = PlayListTablePanel.table;
+		final JTable table = LoadedPlayListPanel.table;
 		if (table.getRowCount() == 0) {
 			return;
 		}

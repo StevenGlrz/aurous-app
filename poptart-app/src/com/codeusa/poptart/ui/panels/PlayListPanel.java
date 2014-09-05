@@ -30,7 +30,7 @@ import com.codeusa.poptart.utils.playlist.PlayListUtils;
  * @author Andrew
  *
  */
-public class PlayListSelectPanel extends JPanel implements ActionListener {
+public class PlayListPanel extends JPanel implements ActionListener {
 	/**
 	 *
 	 */
@@ -78,13 +78,13 @@ public class PlayListSelectPanel extends JPanel implements ActionListener {
 
 	// public static void run() {
 
-	// EventQueue.invokeLater(() -> new PlayListSelectPanel());
+	// EventQueue.invokeLater(() -> new PlayListPanel());
 
 	// }
 
 	// private final PlayListFunctions plFunctions = new PlayListFunctions();
 
-	public PlayListSelectPanel() {
+	public PlayListPanel() {
 		setLayout(null);
 
 		final JScrollPane scrollPane = new JScrollPane();

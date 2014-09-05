@@ -31,7 +31,7 @@ public class SoundCloudGrabber {
 		title = MediaUtils.getBetween(HTML, TITLE_PATTERN, "\",\"");
 		title = StringEscapeUtils.escapeHtml4(title.replaceAll(
 				"[^\\x20-\\x7e]", ""));
-			title = Utils.convertUnicode(title);
+		title = Utils.convertUnicode(title);
 		title = StringEscapeUtils.unescapeHtml4(title);
 
 		if (title.contains(",")) {
@@ -55,11 +55,13 @@ public class SoundCloudGrabber {
 	 */
 	public static String buildPlayListLine(String soundCloudURL) {
 		soundCloudURL = soundCloudURL.replace("https://", "http://");
-		
+
 		if (!soundCloudURL.startsWith("http")) {
 			return "";
 		}
-		if (soundCloudURL.contains("/sets/")) { //need a lot of regex for playlist importing so lets hold off
+		if (soundCloudURL.contains("/sets/")) { // need a lot of regex for
+			// playlist importing so lets
+			// hold off
 			return "";
 		}
 
@@ -79,7 +81,7 @@ public class SoundCloudGrabber {
 		final String line = String.format("%s, %s, %s, %s, %s, %s, %s, %s",
 				songTitle, artist, duration, date, user, "", coverArt,
 				streamURL);
-		
+
 		return line;
 	}
 
@@ -100,12 +102,13 @@ public class SoundCloudGrabber {
 		return streamURL.trim();
 
 	}
-	
+
 	/**
 	 * @author Andrew
 	 *
-	 *        Return a previous stream if it matches the STREAM_DOMAIN pattern, else get it again
-	 * 		@return streamURL
+	 *         Return a previous stream if it matches the STREAM_DOMAIN pattern,
+	 *         else get it again
+	 * @return streamURL
 	 *
 	 */
 	public static String getCachedURL(String url) {
@@ -113,22 +116,19 @@ public class SoundCloudGrabber {
 		if (url.contains(STREAM_DOMAIN)) {
 			return url.trim();
 		}
-			
+
 		url = url.replace("https://", "http://");
 		String html = MediaUtils.getHTML(url);
-		
 
 		if (html.contains(REDIRECTED_PATTERN)) { // just in case
 			url = MediaUtils
 					.getBetween(html, "<a href=\"", "\">redirected</a>");
 			html = MediaUtils.getHTML(url);
 		}
-	
 
 		final String streamURL = MediaUtils.getBetween(html, STREAM_PATTERN,
 				"\",");
-		
-		
+
 		return streamURL.trim();
 
 	}

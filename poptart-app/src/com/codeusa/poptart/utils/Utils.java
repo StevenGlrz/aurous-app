@@ -10,19 +10,19 @@ import java.net.URL;
 import javax.swing.JFrame;
 
 /**
-*
-* @author https://github.com/nikkiii
-* @author Andrew
-* 
-*
-*/
+ *
+ * @author https://github.com/nikkiii
+ * @author Andrew
+ *
+ *
+ */
 public class Utils {
 
 	/**
 	 *
 	 * An enum containing operating system types
 	 *
-	 * 
+	 *
 	 *
 	 */
 	public static enum OperatingSystem {

@@ -14,8 +14,8 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 
 import com.codeusa.poptart.ui.models.Csv2TableModel;
-import com.codeusa.poptart.ui.panels.PlayListSelectPanel;
-import com.codeusa.poptart.ui.panels.PlayListTablePanel;
+import com.codeusa.poptart.ui.panels.LoadedPlayListPanel;
+import com.codeusa.poptart.ui.panels.PlayListPanel;
 
 /**
  * @author Andrew
@@ -81,8 +81,8 @@ public class ModelUtils {
 	public static void loadPlayList(final String fileLocation) {
 		try {
 
-			table = PlayListTablePanel.table;
-			DefaultTableModel tableModel = PlayListTablePanel.tableModel;
+			table = LoadedPlayListPanel.table;
+			DefaultTableModel tableModel = LoadedPlayListPanel.tableModel;
 			final String datafile = fileLocation;
 			final FileReader fin = new FileReader(datafile);
 
@@ -93,10 +93,10 @@ public class ModelUtils {
 						"Error", JOptionPane.ERROR_MESSAGE);
 
 				ModelUtils.loadPlayList("data/scripts/blank.plist");
-				PlayListSelectPanel.canSetLast = false;
+				PlayListPanel.canSetLast = false;
 				return;
 			} else {
-				PlayListSelectPanel.canSetLast = true;
+				PlayListPanel.canSetLast = true;
 			}
 			table.setModel(tableModel);
 			final TableColumn hiddenLink = table.getColumnModel().getColumn(

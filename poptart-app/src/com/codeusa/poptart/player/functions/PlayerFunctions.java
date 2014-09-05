@@ -13,7 +13,7 @@ import javax.swing.JLabel;
 import javax.swing.JTable;
 
 import com.codeusa.poptart.player.scenes.MediaPlayerScene;
-import com.codeusa.poptart.ui.panels.PlayListTablePanel;
+import com.codeusa.poptart.ui.panels.LoadedPlayListPanel;
 import com.codeusa.poptart.ui.panels.PlayerControlPanel;
 import com.codeusa.poptart.utils.media.MediaUtils;
 
@@ -29,7 +29,7 @@ public class PlayerFunctions {
 	public static boolean shuffle = false;
 
 	public static void seekNext() {
-		final JTable table = PlayListTablePanel.table;
+		final JTable table = LoadedPlayListPanel.table;
 		if (table != null) {
 			final int total = table.getRowCount();
 			final int idx = table.getSelectedRow();
@@ -100,7 +100,7 @@ public class PlayerFunctions {
 	}
 
 	public static void seekPrevious() {
-		final JTable table = PlayListTablePanel.table;
+		final JTable table = LoadedPlayListPanel.table;
 		if (table != null) {
 			final int total = table.getRowCount();
 			final int idx = table.getSelectedRow();
@@ -166,7 +166,7 @@ public class PlayerFunctions {
 	}
 
 	public static void repeat() {
-		final JTable table = PlayListTablePanel.table;
+		final JTable table = LoadedPlayListPanel.table;
 		if (table != null) {
 			if (table.getRowCount() > 0) {
 				final int index = table.getSelectedRow();
@@ -189,7 +189,7 @@ public class PlayerFunctions {
 
 	public static void shuffle() {
 
-		final JTable table = PlayListTablePanel.table;
+		final JTable table = LoadedPlayListPanel.table;
 		final int totalIndexs = table.getRowCount();
 		final int randomIndex = new Random().nextInt(totalIndexs);
 		table.setRowSelectionInterval(0, randomIndex);

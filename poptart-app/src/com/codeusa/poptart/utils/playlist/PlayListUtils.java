@@ -33,6 +33,7 @@ import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
 
 import com.codeusa.poptart.grabbers.RedditGrabber;
+import com.codeusa.poptart.grabbers.SoundCloudGrabber;
 import com.codeusa.poptart.player.Settings;
 import com.codeusa.poptart.swinghacks.GhostText;
 import com.codeusa.poptart.tools.DiscoMixer;
@@ -128,7 +129,7 @@ public class PlayListUtils {
 			return tubeLine;
 
 		} else if (sourceURL.contains("soundcloud")) {
-			
+
 			return SoundCloudGrabber.buildPlayListLine(sourceURL);
 		} else {
 			JOptionPane.showMessageDialog(null, "No importer found!", "Error",
