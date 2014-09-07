@@ -1,13 +1,13 @@
-poptart-app
+aurrous-app
 ===========
 
 A app to allow easy streaming from YouTube and other sources to build vast playlist and conversions  
 
-## What Is Project Poptart?
+## What Is Aurous?
 
-Project Poptart is an application I've been working on building over the last month on and off. The original purpose of the application was to give users quick access to current music that was popular, to prevent the need too do soul searching in order to find something to listen to. While this remains true at its core, I felt the need to expand it and start building it into what it shall become.
+Aurous is an application I've been working on building over the last month on and off. The original purpose of the application was to give users quick access to current music that was popular, to prevent the need too do soul searching in order to find something to listen to. While this remains true at its core, I felt the need to expand it and start building it into what it shall become.
     
-The end goal of Project Poptart is to deliver the ability to import your playlist from various sources such as Vimeo, Soundcloud, Groove shark and more too prevent the need of going from one place or the other. Listen to what you love in a centralized manner. 
+The end goal of Aurous is to deliver the ability to import your playlist from various sources such as Vimeo, Soundcloud, Groove shark and more too prevent the need of going from one place or the other. Listen to what you love in a centralized manner. 
 
 ## Beta 2.1.4
 
@@ -41,7 +41,7 @@ function decryptSignature(decodeArray, sig) {
 ```
 
 ##Planned Platforms
-Project Poptart for this first release is making its way to Windows, Mac and Linux. Once the desktop version has reached completion in terms of features/functions mobile versions will come officially to Android, IOS and Blackberry. 
+Aurous for this first release is making its way to Windows, Mac and Linux. Once the desktop version has reached completion in terms of features/functions mobile versions will come officially to Android, IOS and Blackberry. 
 
 ##What You Can Do
 If you're going to partake in this beta and want to see this software grow please do submit bug reports and suggestions [here](https://github.com/Codeusa/poptart-app/issues) to keep track of everything.
