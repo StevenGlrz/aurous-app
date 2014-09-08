@@ -67,7 +67,7 @@ public class DiscoMixer {
 		discoFrame = new JFrame();
 		discoFrame.setTitle("Disco Mixer");
 		discoFrame.setIconImage(Toolkit.getDefaultToolkit().getImage(
-				DiscoMixer.class.getResource("/resources/poptart.png")));
+				DiscoMixer.class.getResource("/resources/aurouslogo.png")));
 		discoFrame.setType(Type.UTILITY);
 		discoFrame.setResizable(false);
 		discoFrame.setBounds(100, 100, 606, 239);

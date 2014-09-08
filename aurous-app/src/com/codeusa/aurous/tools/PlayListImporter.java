@@ -64,7 +64,7 @@ public class PlayListImporter {
 		frmPlaylistImporter.setResizable(false);
 		frmPlaylistImporter.setType(Type.UTILITY);
 		frmPlaylistImporter.setIconImage(Toolkit.getDefaultToolkit().getImage(
-				PlayListImporter.class.getResource("/resources/poptart.png")));
+				PlayListImporter.class.getResource("/resources/aurouslogo.png")));
 		frmPlaylistImporter.setTitle("Playlist Importer");
 		frmPlaylistImporter.getContentPane().setBackground(
 				new Color(32, 33, 35));

@@ -57,7 +57,7 @@ public class PlayListBuilder {
 		PlayListBuilder.frame.setIconImage(Toolkit.getDefaultToolkit()
 				.getImage(
 						PlayListBuilder.class
-								.getResource("/resources/poptart.png")));
+								.getResource("/resources/aurouslogo.png")));
 		PlayListBuilder.frame.setType(Type.UTILITY);
 
 		PlayListBuilder.frame.setResizable(false);

@@ -80,7 +80,7 @@ public class SettingsFrame {
 		frmSettings = new JFrame();
 		frmSettings.setTitle("Settings");
 		frmSettings.setIconImage(Toolkit.getDefaultToolkit().getImage(
-				SettingsFrame.class.getResource("/resources/poptart.png")));
+				SettingsFrame.class.getResource("/resources/aurouslogo.png")));
 		frmSettings.setResizable(false);
 		frmSettings.getContentPane().setBackground(new Color(49, 49, 49));
 		frmSettings.getContentPane().setLayout(null);

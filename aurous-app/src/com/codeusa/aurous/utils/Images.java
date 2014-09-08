@@ -23,7 +23,7 @@ public class Images {
 		{ "pause", "Actions-media-playback-pause-icon.png" },
 		{ "placeholder", "album-placeholder.png"},
 		
-		{ "poptart", "poptart.png" }
+		{ "poptart", "aurouslogo.png" }
 
 	};
 

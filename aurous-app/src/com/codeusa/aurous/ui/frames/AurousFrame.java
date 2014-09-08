@@ -80,12 +80,12 @@ public class AurousFrame implements WindowListener {
 			final com.apple.eawt.Application macApp = com.apple.eawt.Application
 					.getApplication();
 			macApp.setDockIconImage(new ImageIcon(this.getClass().getResource(
-					"/resources/poptart.png")).getImage());
+					"/resources/aurouslogo.png")).getImage());
 		}
 		this.aurousFrame = new JFrame();
 		this.aurousFrame.setResizable(true);
 		this.aurousFrame.setIconImage(Toolkit.getDefaultToolkit().getImage(
-				AurousFrame.class.getResource("/resources/poptart.png")));
+				AurousFrame.class.getResource("/resources/aurouslogo.png")));
 		this.aurousFrame.setTitle("Aurous");
 		this.aurousFrame.getContentPane().setBackground(new Color(36, 35, 40));
 		this.aurousFrame.setSize(new Dimension(800, 600));

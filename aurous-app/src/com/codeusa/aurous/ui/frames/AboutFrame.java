@@ -74,7 +74,7 @@ public class AboutFrame {
 	private void initialize() {
 		frmAbout = new JFrame();
 		frmAbout.setIconImage(Toolkit.getDefaultToolkit().getImage(
-				AboutFrame.class.getResource("/resources/poptart.png")));
+				AboutFrame.class.getResource("/resources/aurouslogo.png")));
 		frmAbout.setType(Type.UTILITY);
 		frmAbout.setTitle("About");
 		frmAbout.setResizable(false);
