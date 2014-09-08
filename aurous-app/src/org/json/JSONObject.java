@@ -1581,12 +1581,12 @@ public class JSONObject {
 			final Package objectPackage = object.getClass().getPackage();
 			final String objectPackageName = objectPackage != null ? objectPackage
 					.getName() : "";
-			if (objectPackageName.startsWith("java.")
-					|| objectPackageName.startsWith("javax.")
-					|| (object.getClass().getClassLoader() == null)) {
-				return object.toString();
-			}
-			return new JSONObject(object);
+					if (objectPackageName.startsWith("java.")
+							|| objectPackageName.startsWith("javax.")
+							|| (object.getClass().getClassLoader() == null)) {
+						return object.toString();
+					}
+					return new JSONObject(object);
 		} catch (final Exception exception) {
 			return null;
 		}

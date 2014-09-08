@@ -377,7 +377,7 @@ public class JSONTokener {
 		 * Handle unquoted text. This could be the values true, false, or null,
 		 * or it can be a number. An implementation (such as this one) is
 		 * allowed to also accept non-standard forms.
-		 * 
+		 *
 		 * Accumulate characters until we reach the end of the text or a
 		 * formatting character.
 		 */

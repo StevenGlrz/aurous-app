@@ -50,7 +50,7 @@ public abstract class JSONzip implements None, PostMortem {
 	 * The characters in JSON numbers can be reduced to 4 bits each.
 	 */
 	public static final byte[] bcd = { '0', '1', '2', '3', '4', '5', '6', '7',
-			'8', '9', '.', '-', '+', 'E' };
+		'8', '9', '.', '-', '+', 'E' };
 
 	/**
 	 * The end of string code.

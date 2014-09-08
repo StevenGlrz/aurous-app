@@ -167,7 +167,7 @@ public class CDL {
 								|| (string.indexOf('\n') >= 0)
 								|| (string.indexOf('\r') >= 0)
 								|| (string.indexOf(0) >= 0) || (string
-								.charAt(0) == '"'))) {
+										.charAt(0) == '"'))) {
 					sb.append('"');
 					final int length = string.length();
 					for (int j = 0; j < length; j += 1) {
