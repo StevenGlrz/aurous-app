@@ -57,6 +57,11 @@ The source code for the first beta release will not be available due to the fact
 Once the source code is made open, you shall want to read over this
 [CONTRIBUTE](https://github.com/Codeusa/poptart-app/blob/master/CONTRIBUTE.md)
 
+##Libs
+
+Download all libs used in this project from here
+http://aurous.me/downloads/lib.zip
+
 ##Requierments 
 - Java 8
 - An internet connection
