@@ -24,7 +24,7 @@ import me.aurous.player.Settings;
 import me.aurous.ui.models.ForcedListSelectionModel;
 import me.aurous.utils.ModelUtils;
 import me.aurous.utils.media.MediaUtils;
-import me.aurous.utils.playlist.PlayListUtils;
+import me.aurous.utils.playlist.Playlist;
 
 /**
  * @author Andrew
@@ -76,7 +76,7 @@ public class TabelPanel extends JPanel implements ActionListener {
 				final int c = e.getKeyCode();
 				final JTable target = (JTable) e.getSource();
 				if (c == KeyEvent.VK_DELETE) {
-					PlayListUtils.removeSelectedRows(target);
+					Playlist.getPlaylist().removeSelectedRows(target);
 					// PlayListUtils.removeLineFromPlayList(file, lineToRemove)
 
 				} else if (c == KeyEvent.VK_ADD) {
@@ -174,7 +174,7 @@ public class TabelPanel extends JPanel implements ActionListener {
 
 		switch (e.getActionCommand()) {
 		case "Delete":
-			PlayListUtils.removeSelectedRows(table);
+			Playlist.getPlaylist().removeSelectedRows(table);
 			break;
 		case "Play":
 			MediaUtils.switchMedia(table);

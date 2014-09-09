@@ -22,7 +22,7 @@ import javax.swing.WindowConstants;
 
 import me.aurous.swinghacks.GhostText;
 import me.aurous.ui.UISession;
-import me.aurous.utils.playlist.PlayListUtils;
+import me.aurous.utils.playlist.Playlist;
 
 /**
  * @author Andrew
@@ -40,14 +40,14 @@ public class PlayListImporter {
 	public static JLabel lblEnterAPlaylist;
 
 	public static void openImporter() {
-		if (PlayListUtils.importerOpen == true) {
+		if (Playlist.getPlaylist().importerOpen == true) {
 			frmPlaylistImporter.toFront();
 			frmPlaylistImporter.repaint();
 			return;
 		}
 		EventQueue.invokeLater(() -> {
 			try {
-				final PlayListImporter window = new PlayListImporter();
+				//final PlayListImporter window = new PlayListImporter();
 				frmPlaylistImporter.setVisible(true);
 			} catch (final Exception e) {
 				e.printStackTrace();
@@ -88,7 +88,7 @@ public class PlayListImporter {
 								JOptionPane.QUESTION_MESSAGE, null,
 								null, null);
 				if (confirm == 0) {
-					PlayListUtils.importerOpen = false;
+					Playlist.getPlaylist().importerOpen = false;
 					frmPlaylistImporter.dispose();
 				}
 
@@ -115,8 +115,7 @@ public class PlayListImporter {
 		final JButton youTubeServiceButton = new JButton("");
 		youTubeServiceButton.addActionListener(e -> {
 
-			PlayListImporter.this.playListURL = PlayListUtils
-					.importPlayListPrompt();
+			PlayListImporter.this.playListURL = Playlist.getPlaylist().importPlayListPrompt();
 			playListURLLabel.setText(PlayListImporter.this.playListURL);
 
 		});
@@ -139,8 +138,7 @@ public class PlayListImporter {
 
 		redditServiceButton = new JButton("");
 		redditServiceButton.addActionListener(e -> {
-			PlayListImporter.this.playListURL = PlayListUtils
-					.importPlayListPrompt();
+			PlayListImporter.this.playListURL = Playlist.getPlaylist().importPlayListPrompt();
 			playListURLLabel.setText(PlayListImporter.this.playListURL);
 
 		});
@@ -193,8 +191,7 @@ public class PlayListImporter {
 
 				importProgressBar.setVisible(true);
 
-				PlayListUtils.getImportRules(this.playListURL,
-						this.playListNameField.getText());
+				Playlist.getPlaylist().getImportRules(this.playListURL, this.playListNameField.getText());
 
 			} else {
 				JOptionPane.showMessageDialog(frmPlaylistImporter,
@@ -221,7 +218,7 @@ public class PlayListImporter {
 		importInstrucLabel.setBounds(94, 228, 181, 22);
 		frmPlaylistImporter.getContentPane().add(importInstrucLabel);
 		frmPlaylistImporter.setLocationRelativeTo(UISession.getJFXPanel());
-		PlayListUtils.importerOpen = true;
+		Playlist.getPlaylist().importerOpen = true;
 
 	}
 }

@@ -33,7 +33,7 @@ import me.aurous.player.Settings;
 import me.aurous.player.functions.PlayerFunctions;
 import me.aurous.ui.frames.SettingsFrame;
 import me.aurous.utils.ModelUtils;
-import me.aurous.utils.playlist.PlayListUtils;
+import me.aurous.utils.playlist.Playlist;
 
 /**
  * @author Andrew
@@ -123,7 +123,7 @@ public class PlayListPanel extends JPanel implements ActionListener {
 				final int c = e.getKeyCode();
 				if (c == KeyEvent.VK_DELETE) {
 
-					PlayListUtils.deletePlayList(displayList);
+					Playlist.getPlaylist().deletePlayList(displayList);
 
 				} else if (c == KeyEvent.VK_ADD) {
 
@@ -215,7 +215,7 @@ public class PlayListPanel extends JPanel implements ActionListener {
 
 		displayList.addMouseListener(mouseListener);
 		final Thread thread = new Thread(
-				() -> PlayListUtils.watchPlayListDirectory(displayList));
+				() -> Playlist.getPlaylist().watchPlayListDirectory(displayList));
 		// start the thread
 		thread.start();
 
@@ -230,7 +230,7 @@ public class PlayListPanel extends JPanel implements ActionListener {
 		final String playlist = o.toString();
 		switch (e.getActionCommand()) {
 		case "Delete":
-			PlayListUtils.deletePlayList(list);
+			Playlist.getPlaylist().deletePlayList(list);
 			break;
 		case "Play":
 			ModelUtils.loadPlayList(playlist);

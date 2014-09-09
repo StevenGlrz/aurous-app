@@ -37,9 +37,7 @@ public class YouTubeDiscoUtils {
 	}
 
 	public static void buildTopPlayList() {
-		YouTubePlayListImporter.importYoutubePlayList(TOP_100_URL,
-				"YouTube Daily Top Tracks");
-
+		Playlist.getPlaylist().buildPlaylistFor("youtube", TOP_100_URL, "YouTube Daily Top Tracks");
 	}
 
 	public static void buildDiscoPlayList(final String query) {
@@ -63,8 +61,7 @@ public class YouTubeDiscoUtils {
 			DiscoMixer.discoProgressBar.setVisible(false);
 			return;
 		}
-		YouTubePlayListImporter.importYoutubePlayList(url, title);
-
+		Playlist.getPlaylist().buildPlaylistFor("youtube", TOP_100_URL, "YouTube Daily Top Tracks");
 	}
 
 	private static String getPlayListTitle(final String url) {

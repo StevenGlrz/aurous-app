@@ -30,7 +30,7 @@ import javax.swing.text.Element;
 import me.aurous.swinghacks.GhostText;
 import me.aurous.ui.UISession;
 import me.aurous.ui.listeners.ContextMenuMouseListener;
-import me.aurous.utils.playlist.PlayListUtils;
+import me.aurous.utils.playlist.Playlist;
 
 /**
  * @author Andrew
@@ -91,7 +91,7 @@ public class PlayListBuilder {
 						"Exit Confirmation", JOptionPane.YES_NO_OPTION,
 						JOptionPane.QUESTION_MESSAGE, null, null, null);
 				if (confirm == 0) {
-					PlayListUtils.builderOpen = false;
+					Playlist.getPlaylist().builderOpen = false;
 					PlayListBuilder.frame.dispose();
 				}
 
@@ -222,7 +222,7 @@ public class PlayListBuilder {
 					playListNameTextField.setEditable(false);
 					final String items = playListTextArea.getText();
 
-					PlayListUtils.buildPlayList(items,
+					Playlist.getPlaylist().buildPlayList(items,
 							playListNameTextField.getText());
 
 				});
@@ -233,7 +233,7 @@ public class PlayListBuilder {
 		PlayListBuilder.frame.pack();
 
 		PlayListBuilder.frame.setVisible(true);
-		PlayListUtils.builderOpen = true;
+		Playlist.getPlaylist().builderOpen = true;
 		final GhostText ghostText = new GhostText("FMA OST",
 				PlayListBuilder.playListNameTextField);
 		ghostText.setHorizontalAlignment(SwingConstants.CENTER);
@@ -242,7 +242,7 @@ public class PlayListBuilder {
 	}
 
 	public static void openBuilder() {
-		if (PlayListUtils.builderOpen == true) {
+		if (Playlist.getPlaylist().builderOpen == true) {
 			frame.toFront();
 			frame.repaint();
 			return;

@@ -18,7 +18,7 @@ import javax.swing.WindowConstants;
 
 import me.aurous.swinghacks.GhostText;
 import me.aurous.ui.UISession;
-import me.aurous.utils.playlist.PlayListUtils;
+import me.aurous.utils.playlist.Playlist;
 import me.aurous.utils.playlist.YouTubeDiscoUtils;
 
 /**
@@ -37,7 +37,7 @@ public class DiscoMixer {
 	 * Launch the application.
 	 */
 	public static void openDisco() {
-		if (PlayListUtils.discoOpen == true) {
+		if (Playlist.getPlaylist().discoOpen == true) {
 			discoFrame.toFront();
 			discoFrame.repaint();
 			return;
@@ -83,7 +83,7 @@ public class DiscoMixer {
 						"Exit Confirmation", JOptionPane.YES_NO_OPTION,
 						JOptionPane.QUESTION_MESSAGE, null, null, null);
 				if (confirm == 0) {
-					PlayListUtils.discoOpen = false;
+					Playlist.getPlaylist().discoOpen = false;
 					discoFrame.dispose();
 				}
 
@@ -141,7 +141,7 @@ public class DiscoMixer {
 		top100Button.setForeground(Color.BLACK);
 		top100Button.setBounds(307, 174, 100, 26);
 		discoFrame.getContentPane().add(top100Button);
-		PlayListUtils.discoOpen = true;
+		Playlist.getPlaylist().discoOpen = true;
 		final GhostText ghostText = new GhostText("Ghost B.C.", queryField);
 		ghostText.setHorizontalAlignment(SwingConstants.CENTER);
 		discoFrame.setLocationRelativeTo(UISession.getPresenter().jfxPanel);

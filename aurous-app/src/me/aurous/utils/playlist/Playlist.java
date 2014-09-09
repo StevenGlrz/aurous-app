@@ -20,6 +20,10 @@ import java.nio.file.Paths;
 import java.nio.file.WatchEvent;
 import java.nio.file.WatchKey;
 import java.nio.file.WatchService;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
@@ -32,9 +36,11 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
 
-import me.aurous.grabbers.RedditGrabber;
-import me.aurous.grabbers.SoundCloudGrabber;
 import me.aurous.player.Settings;
+import me.aurous.services.PlaylistService;
+import me.aurous.services.impl.RedditService;
+import me.aurous.services.impl.SoundCloudService;
+import me.aurous.services.impl.YouTubeService;
 import me.aurous.swinghacks.GhostText;
 import me.aurous.tools.DiscoMixer;
 import me.aurous.tools.PlayListBuilder;
@@ -46,12 +52,28 @@ import me.aurous.utils.media.MediaUtils;
  * @author Andrew
  *
  */
-public class PlayListUtils {
-	public static boolean builderOpen = false;
-	public static boolean importerOpen = false;
-	public static boolean settingsOpen = false;
-	public static boolean discoOpen = false;
-	public static boolean aboutOpen = false;
+public class Playlist {
+
+	private static final Playlist INSTANCE = new Playlist();
+
+	public static Playlist getPlaylist() {
+		return INSTANCE; // TODO Find a better place to place the playlist instance
+	}
+
+	public boolean builderOpen;
+	public boolean importerOpen;
+	public boolean settingsOpen;
+	public boolean discoOpen;
+	public boolean aboutOpen;
+
+	private List<PlaylistService> platforms = new LinkedList<>();
+	private ExecutorService executorService = Executors.newCachedThreadPool();
+
+	private Playlist() {
+		platforms.add(new YouTubeService());
+		platforms.add(new RedditService());
+		platforms.add(new SoundCloudService());
+	}
 
 	/**
 	 * @author Andrew
@@ -59,25 +81,23 @@ public class PlayListUtils {
 	 *         Removes a row from the JTable while deleting the line from the
 	 *         playlist
 	 */
-	public static void removeSelectedRows(final JTable table) {
+	public void removeSelectedRows(final JTable table) {
 		final DefaultTableModel model = (DefaultTableModel) table.getModel();
 		final int[] rows = table.getSelectedRows();
-		removeLineFromPlayList(Settings.getLastPlayList(),
-				(String) table.getValueAt(rows[0], 7));
+		removeLineFromPlayList(Settings.getLastPlayList(), (String) table.getValueAt(rows[0], 7));
 
 		for (int i = 0; i < rows.length; i++) {
 			model.removeRow(rows[i] - i);
 		}
-
 	}
 
-	public static void disableDiscoInterface() {
+	public void disableDiscoInterface() {
 		DiscoMixer.discoBuildButton.setEnabled(false);
 		DiscoMixer.queryField.setEnabled(false);
 		DiscoMixer.top100Button.setEnabled(false);
 	}
 
-	public static void resetDiscoInterface() {
+	public void resetDiscoInterface() {
 		DiscoMixer.discoProgressBar.setValue(0);
 		DiscoMixer.discoProgressBar.setVisible(false);
 
@@ -86,7 +106,7 @@ public class PlayListUtils {
 		DiscoMixer.top100Button.setEnabled(true);
 	}
 
-	public static void resetImporterInterface() {
+	public void resetImporterInterface() {
 		PlayListImporter.importProgressBar.setValue(0);
 		PlayListImporter.importProgressBar.setVisible(false);
 		PlayListImporter.importInstrucLabel.setText("Import Playlist");
@@ -94,7 +114,7 @@ public class PlayListUtils {
 		PlayListImporter.importPlayListButton.setEnabled(true);
 	}
 
-	public static void disableImporterInterface() {
+	public void disableImporterInterface() {
 		PlayListImporter.importProgressBar.setVisible(true);
 
 		PlayListImporter.importPlayListButton.setEnabled(false);
@@ -102,46 +122,37 @@ public class PlayListUtils {
 		PlayListImporter.lblEnterAPlaylist.setText("");
 	}
 
-	public static void getImportRules(final String sourceURL,
-			final String playListName) {
-		if (sourceURL.contains("youtube")) {
+	public void buildPlaylistFor(String name, String url, String playlistName) {
+		PlaylistService service = getPlaylistService(name);
+		if (service != null) {
+			executorService.execute(() -> service.buildPlaylist(url, playlistName));
+		}
+	}
 
-			YouTubePlayListImporter.importYoutubePlayList(sourceURL,
-					playListName);
+	public void getImportRules(final String sourceURL, final String playListName) {
+		PlaylistService service = getPlaylistService(sourceURL);
 
-		} else if (sourceURL.contains("soundcloud")) {
-
-		} else if (sourceURL.contains("reddit")) {
-			RedditGrabber.buildRedditPlayList(sourceURL, playListName);
-
+		if (service != null) {
+			executorService.execute(() -> service.buildPlaylist(sourceURL, playListName));
 		} else {
-			JOptionPane.showMessageDialog(null, "No importer found!", "Error",
-					JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(null, "No importer found!", "Error", JOptionPane.ERROR_MESSAGE);
 			PlayListImporter.importProgressBar.setVisible(false);
 		}
 	}
 
-	public static String getaddRules(final String sourceURL) {
-		if (sourceURL.contains("youtube")) {
-
-			final String tubeLine = YouTubeDataFetcher
-					.buildPlayListLine(sourceURL);
-			return tubeLine;
-
-		} else if (sourceURL.contains("soundcloud")) {
-
-			return SoundCloudGrabber.buildPlayListLine(sourceURL);
-		} else {
-			JOptionPane.showMessageDialog(null, "No importer found!", "Error",
-					JOptionPane.ERROR_MESSAGE);
+	public String getAddRules(final String sourceURL) {
+		PlaylistService service = getPlaylistService(sourceURL);
+		if (service != null) {
+			return service.buildPlayListLine(sourceURL);
 		}
+		JOptionPane.showMessageDialog(null, "No importer found!", "Error", JOptionPane.ERROR_MESSAGE);
 		return "";
 	}
 
 	/**
 	 * popup panel to add url to playlist
 	 */
-	public static void additionToPlayListPrompt() {
+	public void additionToPlayListPrompt() {
 
 		if ((Settings.getLastPlayList() == null)
 				|| Settings.getLastPlayList().isEmpty()) {
@@ -178,7 +189,7 @@ public class PlayListUtils {
 
 	}
 
-	private static void addUrlToPlayList(final String url) {
+	private void addUrlToPlayList(final String url) {
 		if (url.isEmpty()) {
 			return;
 		}
@@ -190,7 +201,7 @@ public class PlayListUtils {
 
 				final FileWriter fw = new FileWriter(filename, true); // the
 				// true
-				final String data = getaddRules(url);
+				final String data = getAddRules(url);
 
 				fw.write("\n" + data);// appends
 
@@ -206,7 +217,7 @@ public class PlayListUtils {
 	/**
 	 * popup panel to create a playlist
 	 */
-	public static String importPlayListPrompt() {
+	public String importPlayListPrompt() {
 		final JTextField urlField = new JTextField();
 		final GhostText gText = new GhostText("Enter service url", urlField);
 
@@ -239,7 +250,7 @@ public class PlayListUtils {
 
 	}
 
-	public static void buildPlayList(final String playListItems,
+	public void buildPlayList(final String playListItems,
 			final String playListName) {
 		final Thread thread = new Thread() {
 			@Override
@@ -254,10 +265,9 @@ public class PlayListUtils {
 					final String[] lines = playListItems.split("\n");
 					printWriter.println(header);
 					for (final String line : lines) {
-						if (PlayListUtils.builderOpen) {
+						if (builderOpen) {
 
-							final String playListItem = MediaUtils
-									.getBuiltString(line.trim());
+							final String playListItem = MediaUtils.getBuiltString(line.trim());
 							if (!playListItem.isEmpty()) {
 
 								printWriter.println(playListItem);
@@ -288,7 +298,7 @@ public class PlayListUtils {
 
 	}
 
-	public static void deletePlayList(final JList<?> list)
+	public void deletePlayList(final JList<?> list)
 
 	{
 		final String path = list.getSelectedValue().toString();
@@ -309,7 +319,7 @@ public class PlayListUtils {
 		}
 	}
 
-	public static void deletePlayList(final String path)
+	public void deletePlayList(final String path)
 
 	{
 
@@ -331,7 +341,7 @@ public class PlayListUtils {
 	}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	public static void watchPlayListDirectory(final JList<?> displayList) {
+	public void watchPlayListDirectory(final JList<?> displayList) {
 
 		try {
 			final WatchService watcher = FileSystems.getDefault()
@@ -358,13 +368,13 @@ public class PlayListUtils {
 
 					System.out.println(kind.name() + ": " + fileName);
 					java.awt.EventQueue
-							// i dont question the Java API, it works now.
+					// i dont question the Java API, it works now.
 					.invokeLater(() -> {
 
-								final DefaultListModel playListModel = new DefaultListModel();
+						final DefaultListModel playListModel = new DefaultListModel();
 
 						final File[] playListFolder = new File(
-										"data/playlist/").listFiles();
+								"data/playlist/").listFiles();
 						if ((kind == ENTRY_CREATE)
 								|| ((kind == ENTRY_DELETE)
 										&& (playListModel != null) && (playListFolder != null))) {
@@ -398,7 +408,7 @@ public class PlayListUtils {
 	 *
 	 *         Deletes line from PlayList
 	 */
-	public static void removeLineFromPlayList(final String file,
+	public void removeLineFromPlayList(final String file,
 			final String lineToRemove) {
 
 		try {
@@ -448,5 +458,14 @@ public class PlayListUtils {
 		} catch (final IOException ex) {
 			ex.printStackTrace();
 		}
+	}
+
+	public PlaylistService getPlaylistService(String context) {
+		for (PlaylistService service : platforms) {
+			if (context.contains(service.getName())) {
+				return service;
+			}
+		}
+		return null;
 	}
 }

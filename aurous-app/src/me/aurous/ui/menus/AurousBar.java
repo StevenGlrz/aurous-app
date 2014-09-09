@@ -10,7 +10,7 @@ import me.aurous.tools.PlayListBuilder;
 import me.aurous.tools.PlayListImporter;
 import me.aurous.ui.frames.AboutFrame;
 import me.aurous.ui.frames.SettingsFrame;
-import me.aurous.utils.playlist.PlayListUtils;
+import me.aurous.utils.playlist.Playlist;
 
 public class AurousBar extends JMenuBar {
 	
@@ -51,8 +51,7 @@ public class AurousBar extends JMenuBar {
 
 		final JMenuItem importSingleItem = new JMenuItem(
 				"Add to Current Playlist");
-		importSingleItem.addActionListener(arg0 -> PlayListUtils
-				.additionToPlayListPrompt());
+		importSingleItem.addActionListener(e -> Playlist.getPlaylist().additionToPlayListPrompt());
 		playListMenu.add(importSingleItem);
 
 		final JMenu toolsMenu = new JMenu("Tools");

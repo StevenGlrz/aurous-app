@@ -22,17 +22,17 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JTable;
 
-import me.aurous.grabbers.SoundCloudGrabber;
-import me.aurous.grabbers.YouTubeGrabber;
 import me.aurous.notifiers.NowPlayingNotification;
 import me.aurous.player.Settings;
 import me.aurous.player.functions.PlayerFunctions;
+import me.aurous.services.impl.SoundCloudService;
+import me.aurous.services.impl.YouTubeService;
 import me.aurous.ui.UISession;
 import me.aurous.ui.panels.ControlPanel;
 import me.aurous.ui.panels.PlayListPanel;
 import me.aurous.ui.panels.TabelPanel;
 import me.aurous.utils.Internet;
-import me.aurous.utils.playlist.YouTubeDataFetcher;
+import me.aurous.utils.playlist.Playlist;
 
 /**
  * @author Andrew
@@ -72,9 +72,9 @@ public class MediaUtils {
 			return "";
 		}
 		if (sourceURL.contains("youtube")) {
-			return YouTubeGrabber.getYouTubeStream(Internet.text(sourceURL));
+			return YouTubeService.getYouTubeStream(Internet.text(sourceURL));
 		} else if (sourceURL.contains("soundcloud")) {
-			return SoundCloudGrabber.getCachedURL(sourceURL);
+			return SoundCloudService.getCachedURL(sourceURL);
 		} else {
 			return "";
 		}
@@ -86,14 +86,7 @@ public class MediaUtils {
 	 *         handles a given site and returns a built playlist string
 	 */
 	public static String getBuiltString(final String sourceURL) {
-		if (sourceURL.contains("youtube") || sourceURL.contains("youtu.be")) {
-
-			return YouTubeDataFetcher.buildPlayListLine(sourceURL);
-		} else if (sourceURL.contains("soundcloud")) {
-			return SoundCloudGrabber.buildPlayListLine(sourceURL);
-		} else {
-			return "";
-		}
+		return Playlist.getPlaylist().getAddRules(sourceURL);
 	}
 
 	public static void muteToggle() {

@@ -20,7 +20,7 @@ import javax.swing.WindowConstants;
 
 import me.aurous.ui.UISession;
 import me.aurous.utils.Utils;
-import me.aurous.utils.playlist.PlayListUtils;
+import me.aurous.utils.playlist.Playlist;
 
 /**
  * @author Andrew
@@ -47,7 +47,7 @@ public class AboutFrame {
 	 * Launch the application.
 	 */
 	public static void showAbout() {
-		if (PlayListUtils.aboutOpen == true) {
+		if (Playlist.getPlaylist().aboutOpen == true) {
 			frmAbout.toFront();
 			frmAbout.repaint();
 			return;
@@ -88,7 +88,7 @@ public class AboutFrame {
 			public void windowClosing(
 					final java.awt.event.WindowEvent windowEvent) {
 
-				PlayListUtils.aboutOpen = false;
+				Playlist.getPlaylist().aboutOpen = false;
 				frmAbout.dispose();
 
 			}
@@ -254,7 +254,7 @@ public class AboutFrame {
 				.getResource("/resources/andrew.jpg")));
 		andrewsAvatar.setBounds(0, 0, 80, 63);
 		frmAbout.getContentPane().add(andrewsAvatar);
-		PlayListUtils.aboutOpen = true;
+		Playlist.getPlaylist().aboutOpen = true;
 		frmAbout.setLocationRelativeTo(UISession.getJFXPanel());
 	}
 }

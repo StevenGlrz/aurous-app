@@ -1,10 +1,11 @@
-package me.aurous.grabbers;
+package me.aurous.services.impl;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
 import me.aurous.player.Settings;
+import me.aurous.services.PlaylistService;
 import me.aurous.utils.Internet;
 import me.aurous.utils.media.MediaUtils;
 
@@ -12,7 +13,7 @@ import org.apache.commons.lang3.StringEscapeUtils;
 
 import com.sun.javafx.Utils;
 
-public class SoundCloudGrabber {
+public class SoundCloudService implements PlaylistService {
 
 	private static String TITLE_PATTERN = "\"title\":\"";
 	private static String ALBUM_ART_PATTERN = "\"og:title\" /><meta content=\"";
@@ -55,7 +56,8 @@ public class SoundCloudGrabber {
 	 * @return
 	 *
 	 */
-	public static String buildPlayListLine(String soundCloudURL) {
+	@Override
+	public String buildPlayListLine(String soundCloudURL) {
 		soundCloudURL = soundCloudURL.replace("https://", "http://");
 
 		if (!soundCloudURL.startsWith("http")) {
@@ -70,7 +72,6 @@ public class SoundCloudGrabber {
 		final String HTML = Internet.text(soundCloudURL);
 
 		if (HTML.isEmpty()) {
-
 			return "";
 		}
 		final String streamURL = (getStreamURL(HTML));
@@ -83,7 +84,6 @@ public class SoundCloudGrabber {
 		final String line = String.format("%s, %s, %s, %s, %s, %s, %s, %s",
 				songTitle, artist, duration, date, user, "", coverArt,
 				streamURL);
-
 		return line;
 	}
 
@@ -191,6 +191,17 @@ public class SoundCloudGrabber {
 				"\" property=\"og:i");
 
 		return coverArt.trim();
+	}
+
+	@Override
+	public void buildPlaylist(String url, String playlistName) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public String getName() {
+		return "soundcloud";
 	}
 
 }

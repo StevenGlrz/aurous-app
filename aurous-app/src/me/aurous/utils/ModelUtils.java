@@ -80,7 +80,7 @@ public class ModelUtils {
 
 	public static void loadPlayList(final String fileLocation) {
 		try {
-
+System.out.println(fileLocation);
 			table = TabelPanel.table;
 			DefaultTableModel tableModel = TabelPanel.tableModel;
 			final String datafile = fileLocation;
@@ -92,7 +92,7 @@ public class ModelUtils {
 						"Error loading playlist, corrupted or unfinished.",
 						"Error", JOptionPane.ERROR_MESSAGE);
 
-				ModelUtils.loadPlayList("data/scripts/blank.plist");
+				ModelUtils.loadPlayList("ta/scripts/blank.plist");
 				PlayListPanel.canSetLast = false;
 				return;
 			} else {

@@ -18,7 +18,7 @@ import javax.swing.WindowConstants;
 
 import me.aurous.player.Settings;
 import me.aurous.ui.UISession;
-import me.aurous.utils.playlist.PlayListUtils;
+import me.aurous.utils.playlist.Playlist;
 
 /**
  * @author Andrew
@@ -52,7 +52,7 @@ public class SettingsFrame {
 	 * Launch the application.
 	 */
 	public static void openSettings() {
-		if (PlayListUtils.settingsOpen == true) {
+		if (Playlist.getPlaylist().settingsOpen == true) {
 			frmSettings.toFront();
 			frmSettings.repaint();
 			return;
@@ -90,7 +90,7 @@ public class SettingsFrame {
 			public void windowClosing(
 					final java.awt.event.WindowEvent windowEvent) {
 
-				PlayListUtils.settingsOpen = false;
+				Playlist.getPlaylist().settingsOpen = false;
 
 				frmSettings.dispose();
 
